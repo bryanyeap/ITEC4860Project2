@@ -13,7 +13,7 @@ public class MyTasks {
     public int id = 1;
     public int row = 1;
 
-    @Scheduled(fixedRate = 1500)
+    //@Scheduled(fixedRate = 1500)
     public void automatedPost() {
         String[] makeModels = {"Toyota Camry", "Honda Civic", "Nissan Altima", "Nissan Sentra", "Ford Mustang", "Honda Accord"};
         Integer[] years = {1990, 2001, 2018, 2077, 1964, 2000};
@@ -26,7 +26,7 @@ public class MyTasks {
         restTemplate.postForObject(url, vehicle, Vehicle.class);
     }
 
-    @Scheduled(fixedRate = 2500)
+    //@Scheduled(fixedRate = 2500)
     public void automatedPut() {
         String[] makeModels = {"Toyota Camry", "Honda Civic", "Nissan Altima", "Nissan Sentra", "Ford Mustang", "Honda Accord"};
         Integer[] years = {1990, 2001, 2018, 2077, 1964, 2000};
@@ -41,7 +41,7 @@ public class MyTasks {
         id++;
     }
 
-    @Scheduled(fixedRate = 5000)
+    //@Scheduled(fixedRate = 5000)
     public void automatedDelete() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8080/deleteVehicle/" + row;
@@ -49,7 +49,7 @@ public class MyTasks {
         row++;
     }
 
-    @Scheduled(fixedRate = 5000)
+    //@Scheduled(fixedRate = 5000)
     public void automatedLatest() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8080/getLatestVehicles";
