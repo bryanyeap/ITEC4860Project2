@@ -6,9 +6,16 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 @Aspect
 @Component
 public class CustomAspect {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Pointcut("execution(* com.example.vehicleproject2.*.*(..))")
     public void customMethod() {}
@@ -31,5 +38,11 @@ public class CustomAspect {
         else if(point.indexOf("getLatestVehicles(") >= 0){
             System.out.println("Custom: GET request called");
         }
+    }
+
+    @Before("customMethod()")
+    public void count(final JoinPoint joinPoint) {
+        Query query = entityManager.createNativeQuery("SELECT COUNT(*) FROM vehicles");
+        System.out.println("Count: " + query.getSingleResult());
     }
 }
